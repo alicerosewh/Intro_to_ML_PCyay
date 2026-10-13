@@ -8,9 +8,7 @@ import plotly.io as pio
 mi_sample = np.load("data/training_data/mixed_samples/2pMI.npy")
 pts = mi_sample[0]
 
-fig = go.Figure(go.Scatter3d(
-    x=pts[:, 0], y=pts[:, 1], z=pts[:, 2],
-    mode="markers",
-    marker=dict(size=2, color=pts[:, 3], colorscale="Viridis", showscale=True),
-))
-fig.show()
+fig = plt.figure()
+ax = fig.add_subplot(projection="3d")
+ax.scatter(pts[:, 0], pts[:, 1], pts[:, 2], c=pts[:, 3], s=1)
+plt.show()
