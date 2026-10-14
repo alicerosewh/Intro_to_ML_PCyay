@@ -6,9 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 import pandas as pd
+import seaborn as sns
 
 folder = "data/training_data/mixed_samples"
-files = [f for f in os.listdir(folder) if f.endswith(".npy")]
+files = [f for f in os.listdir(folder) if f.endswith(".npy") and f != "658healthy.npy"]
 files = sorted(files, key=lambda f: int(re.match(r"\d+", f).group()))
 
 files_dem = "data/training_data/mixed_demographics.csv"
@@ -24,9 +25,6 @@ pca = PCA(n_components=6)
 X_pca = pca.fit_transform(X)
 print("X_pca shape:", X_pca.shape) # Shape (900,6)
 
-import seaborn as sns
-
-
 scores_df = pd.DataFrame(X_pca, columns=[f"PC{i+1}" for i in range(X_pca.shape[1])])
 scores_df["filename"] = files
 
@@ -36,8 +34,7 @@ scores_df["label"] = scores_df["filename"].apply(
 
 scores_df["sex"] = sex
 
-
 sns.set_style("white")
-sns.pairplot(scores_df, hue="sex", diag_kind="hist", corner =True)
+sns.pairplot(scores_df, hue="sex", corner=True)
 plt.savefig("results/pca_pairplot_sex.png", dpi=300)
 plt.show()

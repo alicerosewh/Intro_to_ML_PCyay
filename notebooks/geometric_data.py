@@ -41,5 +41,3 @@ for i, (f, d) in enumerate(zip(files, data)):
 plt.tight_layout()
 plt.savefig("results/first_timestep_10_samples.png", dpi=300)
 plt.show()
-
-
