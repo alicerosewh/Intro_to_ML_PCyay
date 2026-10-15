@@ -13,7 +13,6 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 folder = "data/training_data/clean_samples"
 
-########### Here add in any others that are weird to take out ################
 files = [f for f in os.listdir(folder) if f.endswith(".npy")]
 files = sorted(files, key=lambda f: int(re.match(r"\d+", f).group()))
 
