@@ -32,6 +32,10 @@ scores_df["label"] = scores_df["filename"].apply(
     lambda filename: "pMI" if "pMI" in filename else "healthy"
 )
 
+print("scores_df shape:", scores_df.shape)
+print("\nNumber of samples per label:")
+print(scores_df["label"].value_counts())
+
 scores_df["sex"] = sex
 
 sns.set_style("white")
