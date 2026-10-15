@@ -12,10 +12,6 @@ folder = "data/training_data/mixed_samples"
 files = [f for f in os.listdir(folder) if f.endswith(".npy")]
 files = sorted(files, key=lambda f: int(re.match(r"\d+", f).group()))
 
-files_dem = "data/training_data/mixed_demographics.csv"
-data_dem = pd.read_csv(files_dem)
-sex = data_dem["sex"]
-
 frame = 0  # try other frames from 0 to 9
 X = np.array([np.load(os.path.join(folder, f), mmap_mode="r")[frame, :, :3].ravel()for f in files])
 print("X shape:", X.shape) # Shape (900,54000)
