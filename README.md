@@ -1,6 +1,6 @@
 # Intro_to_ML_PCyay - Classifying Myocardial Infarction (pMI vs Healthy)
 
-Binary classification of subjects as **healthy** or **post-myocardial infarction (pMI)** using a combination of tabular demographic data and 3D cardiac geometry (point-cloud) data across the cardiac cycle.
+Binary classification of subjects as healthy or post-myocardial infarction (pMI) using a combination of tabular demographic data and 3D cardiac geometry (point-cloud) data across the cardiac cycle.
 
 Coursework for the CDT in Health Data Science – *Introduction to Machine Learning* (Classification task).
 
@@ -25,7 +25,7 @@ The pipeline:
 | `data/training_data/impossible_samples/` | The 38 subjects flagged as anatomically impossible. |
 | `data/test_samples/test.csv` | 100 unlabelled test subjects (demographics only). |
 
-> **Note:** `.npy` geometry files are **not** tracked in git (see `.gitignore`) because of their size. Download them from the course page and place them in the folders above before running the code.
+> **Note:** `.npy` geometry files are not tracked in git (see `.gitignore`) because of their size. Download them from the course page and place them in the folders above before running the code.
 
 ---
 
@@ -64,11 +64,11 @@ Intro_to_ML_PCyay/
 - PCA of the geometry coloured by sex and label (`results/pca_pairplot_sex.png`).
 
 ### 2. Removing impossible anatomies
-PCA of the geometry revealed a distinct group of outlying samples. These were isolated with PCA (95% variance) + KMeans (k = 2), inspected visually (`results/weird_samples_animation.gif`) and confirmed as anatomically impossible. **38 subjects were removed**, leaving **862** subjects.
+PCA of the geometry revealed a distinct group of outlying samples. These were isolated with PCA (95% variance) + KMeans (k = 2), inspected visually (`results/weird_samples_animation.gif`) and confirmed as anatomically impossible. 38 subjects were removed, leaving 862 subjects.
 
 ### 3. Train / test split
 Stratified split of the 862 clean subjects (`random_state=9888`):
-- **Development set:** 712 subjects (360 healthy / 352 pMI)
+- **Training and validation set:** 712 subjects (360 healthy / 352 pMI)
 - **Held-out test set:** 150 subjects (76 healthy / 74 pMI)
 
 ### 4. Features
@@ -77,7 +77,7 @@ Each subject is represented by:
 - **Geometry PCA (7):** the coordinates of all 10 frames plus one-hot encoded region labels are standardised and reduced to 7 principal components (~77% variance retained)
 - **Motion features (5):** mean and std of position, mean and std of frame-to-frame displacement, and mean total distance travelled per point
 
-All preprocessing (one-hot encoder, scaler, PCA) is **fit only on the training fold** inside cross-validation to avoid data leakage.
+All preprocessing (one-hot encoder, scaler, PCA) is fit only on the training fold inside cross-validation to avoid data leakage.
 
 ### 5. Models and tuning
 Stratified 5-fold cross-validation on the development set, with grid search over:
@@ -88,7 +88,7 @@ Stratified 5-fold cross-validation on the development set, with grid search over
 | Random Forest | `n_estimators`, `max_depth`, `min_samples_leaf`, `max_features` |
 | Gradient Boosted Trees | `n_estimators`, `learning_rate`, `max_depth`, `subsample` |
 
-Model selection was based on mean cross-validated **F1 score**.
+Model selection was based on mean cross-validated F1 score.
 
 
 ## Results
@@ -119,13 +119,13 @@ Tree-based models clearly outperform logistic regression, suggesting non-linear 
 git clone https://github.com/alicerosewh/Intro_to_ML_PCyay.git
 cd Intro_to_ML_PCyay
 python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
 1. Place the `.npy` geometry folders inside `data/training_data/` (see **Data** above).
-2. Run the `.py` scripts **from the repository root**, e.g. `python notebooks/clustering.py`.
-3. Open and run `notebooks/demographics_classification.ipynb` **from inside the `notebooks/` folder** (it uses `../data/...` paths).
+2. Run the `.py` scripts from the repository root, e.g. `python notebooks/clustering.py`.
+3. Open and run `notebooks/demographics_classification.ipynb` from inside the `notebooks/` folder (it uses `../data/...` paths).
 
 All random seeds are fixed (`random_state=9888`) for reproducibility.
 
