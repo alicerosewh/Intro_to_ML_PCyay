@@ -109,7 +109,15 @@ Model selection was based on mean cross-validated F1 score.
 | Random Forest | **0.86** | **0.85** | 0.892 |
 | Gradient Boosted Trees | 0.84 | 0.83 | **0.893** |
 
-Tree-based models clearly outperform logistic regression, suggesting non-linear relationships between the features and MI status. Adding geometry and motion features on top of demographics improves discrimination.
+### Results on `labelled_test_data` ###
+
+| Model | Accuracy | Precision | F1 (pMI) | ROC AUC |
+|---|---|---|---|
+| Logistic Regression | 0.68 | 0.692 | 0.692 | 0.758 |
+| Random Forest | 0.71 | 0.702 | 0.769 | 0.794 | 
+| Gradient Boosted Trees | 0.65 | 0.667 | 0.654 | 0.708
+
+
 
 ---
 
