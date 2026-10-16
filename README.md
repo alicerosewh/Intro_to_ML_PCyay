@@ -4,7 +4,6 @@ Binary classification of subjects as **healthy** or **post-myocardial infarction
 
 Coursework for the CDT in Health Data Science – *Introduction to Machine Learning* (Classification task).
 
----
 
 ## Project overview
 
@@ -15,8 +14,6 @@ The pipeline:
 3. **Feature engineering** – combining demographics, PCA components of the geometry, and hand-crafted motion features.
 4. **Model selection** – comparing Logistic Regression, Random Forest and Gradient Boosted Trees using stratified 5-fold cross-validation and grid-search hyper-parameter tuning.
 5. **Final evaluation** on a held-out test set.
-
----
 
 ## Data
 
@@ -37,21 +34,21 @@ The pipeline:
 ```
 Intro_to_ML_PCyay/
 ├── data/
-│   ├── training_data/          # demographics CSV + geometry .npy folders (npy not tracked)
-│   └── test_samples/           # unlabelled test demographics
+│   ├── training_data/ # demographics CSV + geometry .npy folders (npy not tracked)
+│   └── test_samples/  # unlabelled test demographics
 ├── notebooks/
-│   ├── tabular_data_greggy.ipynb          # EDA of demographic features (box/violin/pair plots, correlations)
-│   ├── animated_geom_data.py              # 3D animations of example hearts across the 10 frames
-│   ├── PCA_geometric.py                   # PCA of geometry, pairplots coloured by sex / label
-│   ├── PCA_geom_indexed.py                # Same PCA with subject indices annotated (to spot outliers)
-│   ├── global_PCA.py                      # PCA on summary features of each frame
-│   ├── clustering.py                      # PCA + KMeans to isolate impossible anatomies
-│   ├── pca_good_only.py                   # PCA on cleaned samples only
-│   ├── geometric_data_pipeline.py         # Feature preparation for geometry data
-│   └── demographics_classification.ipynb  # MAIN NOTEBOOK: cleaning, features, CV, tuning, test evaluation
-├── results/                    # Saved figures and animations
-├── tests/                      # Test CSVs (labelled and unlabelled)
-├── src/                        # (placeholder for reusable code)
+│   ├── tabular_data_greggy.ipynb # EDA of demographic features (box/violin/pair plots, correlations)
+│   ├── animated_geom_data.py # 3D animations of example hearts across the 10 frames
+│   ├── PCA_geometric.py # PCA of geometry, pairplots coloured by sex / label
+│   ├── PCA_geom_indexed.py # Same PCA with subject indices annotated (to spot outliers)
+│   ├── global_PCA.py # PCA on summary features of each frame
+│   ├── clustering.py # PCA + KMeans to isolate impossible anatomies
+│   ├── pca_good_only.py # PCA on cleaned samples only
+│   ├── geometric_data_pipeline.py # Feature preparation for geometry data
+│   └── demographics_classification.ipynb  # main notebook: cleaning, features, CV, tuning, test evaluation
+├── results/ # Saved figures and animations
+├── tests/ # Test CSVs (labelled and unlabelled)
+├── src/ # (placeholder for reusable code)
 ├── requirements.txt
 ├── LICENSE
 └── README.md
@@ -91,13 +88,12 @@ Stratified 5-fold cross-validation on the development set, with grid search over
 | Random Forest | `n_estimators`, `max_depth`, `min_samples_leaf`, `max_features` |
 | Gradient Boosted Trees | `n_estimators`, `learning_rate`, `max_depth`, `subsample` |
 
-Model selection was based on mean cross-validated **ROC AUC**.
+Model selection was based on mean cross-validated **F1 score**.
 
----
 
 ## Results
 
-### Cross-validation (tuned hyper-parameters, 5 folds)
+### Cross-validation (tuned hyperparameters, 5 folds)
 
 | Model | ROC AUC | F1 | Best params |
 |---|---|---|---|
@@ -138,7 +134,8 @@ All random seeds are fixed (`random_state=9888`) for reproducibility.
 ## Authors
 
 - Alice Wilson
-- *(add other team members)*
+- Leili Sabourian
+- Greggy Anselmetti
 
 ## License
 
